@@ -1,0 +1,287 @@
+
+GccApplication7.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000170  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  000001c4  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  000001c4  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000001f4  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000078  00000000  00000000  00000230  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000009bb  00000000  00000000  000002a8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000792  00000000  00000000  00000c63  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000004d6  00000000  00000000  000013f5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000c0  00000000  00000000  000018cc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000039e  00000000  00000000  0000198c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000219  00000000  00000000  00001d2a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000048  00000000  00000000  00001f43  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   8:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  10:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  14:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  18:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  1c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  20:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  24:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  28:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  2c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  30:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  34:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  38:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  3c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  40:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  44:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  48:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  4c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  50:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e0 e7       	ldi	r30, 0x70	; 112
+  68:	f1 e0       	ldi	r31, 0x01	; 1
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a0 36       	cpi	r26, 0x60	; 96
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+  76:	0e 94 41 00 	call	0x82	; 0x82 <main>
+  7a:	0c 94 b6 00 	jmp	0x16c	; 0x16c <_exit>
+
+0000007e <__bad_interrupt>:
+  7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000082 <main>:
+#include "SPI.h"
+#include <util/delay.h>
+int main(void);
+
+int main(void)
+{
+  82:	cf 93       	push	r28
+  84:	df 93       	push	r29
+  86:	00 d0       	rcall	.+0      	; 0x88 <main+0x6>
+  88:	cd b7       	in	r28, 0x3d	; 61
+  8a:	de b7       	in	r29, 0x3e	; 62
+ 
+	
+	tc72Init();
+  8c:	0e 94 68 00 	call	0xd0	; 0xd0 <tc72Init>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  90:	2f eb       	ldi	r18, 0xBF	; 191
+  92:	84 ed       	ldi	r24, 0xD4	; 212
+  94:	91 e0       	ldi	r25, 0x01	; 1
+  96:	21 50       	subi	r18, 0x01	; 1
+  98:	80 40       	sbci	r24, 0x00	; 0
+  9a:	90 40       	sbci	r25, 0x00	; 0
+  9c:	e1 f7       	brne	.-8      	; 0x96 <main+0x14>
+  9e:	00 c0       	rjmp	.+0      	; 0xa0 <main+0x1e>
+  a0:	00 00       	nop
+	_delay_ms(150);
+	char MSB=0;
+  a2:	19 82       	std	Y+1, r1	; 0x01
+	char LSB =0;
+  a4:	1a 82       	std	Y+2, r1	; 0x02
+    while (1) 
+    {
+		tc72_Read(&MSB ,&LSB);
+  a6:	be 01       	movw	r22, r28
+  a8:	6e 5f       	subi	r22, 0xFE	; 254
+  aa:	7f 4f       	sbci	r23, 0xFF	; 255
+  ac:	ce 01       	movw	r24, r28
+  ae:	01 96       	adiw	r24, 0x01	; 1
+  b0:	0e 94 80 00 	call	0x100	; 0x100 <tc72_Read>
+  b4:	f8 cf       	rjmp	.-16     	; 0xa6 <main+0x24>
+
+000000b6 <masterInit>:
+PORTD_BASE_ADDRESS};
+
+
+void masterInit(void){
+ /*Set MOSI, SCK and SS Output*/
+ DDR_REG(1)=(1<<MOSI)|(1<<SCK)|(1<<SS);
+  b6:	80 eb       	ldi	r24, 0xB0	; 176
+  b8:	87 bb       	out	0x17, r24	; 23
+ /*Enable SPI Master set clock rate fck/128 data is 
+ sample at falling edge*/
+ SPCR=(1<<SPE)|(1<<MSTR)|(1<<SPR1)|(1<<SPR0)|(1<<CPHA);
+  ba:	87 e5       	ldi	r24, 0x57	; 87
+  bc:	8d b9       	out	0x0d, r24	; 13
+  be:	08 95       	ret
+
+000000c0 <masterTransmit>:
+ 
+}
+
+void masterTransmit(char spiData){
+ /*Start the transmission*/
+ SPDR=spiData;
+  c0:	8f b9       	out	0x0f, r24	; 15
+ /*Wait for completion*/
+ while(!(SPSR&(1<<SPIF)));
+  c2:	77 9b       	sbis	0x0e, 7	; 14
+  c4:	fe cf       	rjmp	.-4      	; 0xc2 <masterTransmit+0x2>
+ 
+ 
+}
+  c6:	08 95       	ret
+
+000000c8 <masterReceive>:
+
+char masterReceive(void){
+ /*Wait for the SPI buffer's full*/
+ while(!(SPSR&(1<<SPIF)));
+  c8:	77 9b       	sbis	0x0e, 7	; 14
+  ca:	fe cf       	rjmp	.-4      	; 0xc8 <masterReceive>
+ /*return SPI Buffer*/
+ return SPDR;
+  cc:	8f b1       	in	r24, 0x0f	; 15
+}
+  ce:	08 95       	ret
+
+000000d0 <tc72Init>:
+
+
+
+
+void tc72Init(void){
+	 masterInit();
+  d0:	0e 94 5b 00 	call	0xb6	; 0xb6 <masterInit>
+	 PORT_REG|=(1<<ENABLE_PIN);
+  d4:	88 b3       	in	r24, 0x18	; 24
+  d6:	80 61       	ori	r24, 0x10	; 16
+  d8:	88 bb       	out	0x18, r24	; 24
+	 /*Select Control Register*/
+	 masterTransmit(TC72_CONTROL_WRITE_REG);
+  da:	80 e8       	ldi	r24, 0x80	; 128
+  dc:	0e 94 60 00 	call	0xc0	; 0xc0 <masterTransmit>
+	 /*Select Continuous temperature Conversion*/
+	 masterTransmit(TC72_MODE_CONTINUOUS);
+  e0:	84 e0       	ldi	r24, 0x04	; 4
+  e2:	0e 94 60 00 	call	0xc0	; 0xc0 <masterTransmit>
+	 PORT_REG &=~(1<<ENABLE_PIN);
+  e6:	88 b3       	in	r24, 0x18	; 24
+  e8:	8f 7e       	andi	r24, 0xEF	; 239
+  ea:	88 bb       	out	0x18, r24	; 24
+  ec:	2f eb       	ldi	r18, 0xBF	; 191
+  ee:	84 ed       	ldi	r24, 0xD4	; 212
+  f0:	91 e0       	ldi	r25, 0x01	; 1
+  f2:	21 50       	subi	r18, 0x01	; 1
+  f4:	80 40       	sbci	r24, 0x00	; 0
+  f6:	90 40       	sbci	r25, 0x00	; 0
+  f8:	e1 f7       	brne	.-8      	; 0xf2 <tc72Init+0x22>
+  fa:	00 c0       	rjmp	.+0      	; 0xfc <tc72Init+0x2c>
+  fc:	00 00       	nop
+  fe:	08 95       	ret
+
+00000100 <tc72_Read>:
+	 _delay_ms(150);
+ 
+}
+
+
+void tc72_Read(char * msb ,char * lsb){
+ 100:	0f 93       	push	r16
+ 102:	1f 93       	push	r17
+ 104:	cf 93       	push	r28
+ 106:	df 93       	push	r29
+ 108:	8c 01       	movw	r16, r24
+ 10a:	eb 01       	movw	r28, r22
+	PORT_REG|=(1<<ENABLE_PIN);
+ 10c:	88 b3       	in	r24, 0x18	; 24
+ 10e:	80 61       	ori	r24, 0x10	; 16
+ 110:	88 bb       	out	0x18, r24	; 24
+  /*Read the MSB*/
+  masterTransmit(TC72_MSB_REG);
+ 112:	82 e0       	ldi	r24, 0x02	; 2
+ 114:	0e 94 60 00 	call	0xc0	; 0xc0 <masterTransmit>
+  /*Issue one more clock frame to force data out*/
+  masterTransmit(TC72_CONTROL_READ_REG);
+ 118:	80 e0       	ldi	r24, 0x00	; 0
+ 11a:	0e 94 60 00 	call	0xc0	; 0xc0 <masterTransmit>
+  PORT_REG &=~(1<<ENABLE_PIN);
+ 11e:	88 b3       	in	r24, 0x18	; 24
+ 120:	8f 7e       	andi	r24, 0xEF	; 239
+ 122:	88 bb       	out	0x18, r24	; 24
+ 124:	87 ee       	ldi	r24, 0xE7	; 231
+ 126:	93 e0       	ldi	r25, 0x03	; 3
+ 128:	01 97       	sbiw	r24, 0x01	; 1
+ 12a:	f1 f7       	brne	.-4      	; 0x128 <tc72_Read+0x28>
+ 12c:	00 c0       	rjmp	.+0      	; 0x12e <tc72_Read+0x2e>
+ 12e:	00 00       	nop
+  _delay_ms(1);
+  *msb=masterReceive();
+ 130:	0e 94 64 00 	call	0xc8	; 0xc8 <masterReceive>
+ 134:	f8 01       	movw	r30, r16
+ 136:	80 83       	st	Z, r24
+  PORT_REG |=(1<<ENABLE_PIN);
+ 138:	88 b3       	in	r24, 0x18	; 24
+ 13a:	80 61       	ori	r24, 0x10	; 16
+ 13c:	88 bb       	out	0x18, r24	; 24
+  /*Read The LSB*/
+  masterTransmit(TC72_LSB_REG);
+ 13e:	81 e0       	ldi	r24, 0x01	; 1
+ 140:	0e 94 60 00 	call	0xc0	; 0xc0 <masterTransmit>
+  /*Issue one more clock frame to force data out*/
+  masterTransmit(TC72_CONTROL_READ_REG);
+ 144:	80 e0       	ldi	r24, 0x00	; 0
+ 146:	0e 94 60 00 	call	0xc0	; 0xc0 <masterTransmit>
+  PORT_REG &=~(1<<ENABLE_PIN); 
+ 14a:	88 b3       	in	r24, 0x18	; 24
+ 14c:	8f 7e       	andi	r24, 0xEF	; 239
+ 14e:	88 bb       	out	0x18, r24	; 24
+ 150:	87 ee       	ldi	r24, 0xE7	; 231
+ 152:	93 e0       	ldi	r25, 0x03	; 3
+ 154:	01 97       	sbiw	r24, 0x01	; 1
+ 156:	f1 f7       	brne	.-4      	; 0x154 <tc72_Read+0x54>
+ 158:	00 c0       	rjmp	.+0      	; 0x15a <tc72_Read+0x5a>
+ 15a:	00 00       	nop
+  _delay_ms(1);
+  *lsb=masterReceive();
+ 15c:	0e 94 64 00 	call	0xc8	; 0xc8 <masterReceive>
+ 160:	88 83       	st	Y, r24
+}
+ 162:	df 91       	pop	r29
+ 164:	cf 91       	pop	r28
+ 166:	1f 91       	pop	r17
+ 168:	0f 91       	pop	r16
+ 16a:	08 95       	ret
+
+0000016c <_exit>:
+ 16c:	f8 94       	cli
+
+0000016e <__stop_program>:
+ 16e:	ff cf       	rjmp	.-2      	; 0x16e <__stop_program>
