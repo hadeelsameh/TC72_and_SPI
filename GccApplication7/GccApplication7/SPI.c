@@ -2,7 +2,7 @@
  * SPI.c
  *
  * Created: 01/06/2021 12:16:13
- *  Author: Hadeel
+ *  Author: Enas
  */ 
 
 #include "SPI.h"
@@ -26,10 +26,21 @@ PORTD_BASE_ADDRESS};
 void masterInit(void){
  /*Set MOSI, SCK and SS Output*/
  DDR_REG(1)=(1<<MOSI)|(1<<SCK)|(1<<SS);
+ DDR_REG(1)= DDR_REG(1)& ~(1<<MISO);
  /*Enable SPI Master set clock rate fck/128 data is 
  sample at falling edge*/
  SPCR=(1<<SPE)|(1<<MSTR)|(1<<SPR1)|(1<<SPR0)|(1<<CPHA);
  
+}
+
+void slaveInit(void){
+	 
+ DDR_REG(1)= DDR_REG(1)& (~(1<<SS));  
+ DDR_REG(1)= DDR_REG(1)& (~(1<<MOSI));
+ DDR_REG(1)= DDR_REG(1)| (1<<MISO);
+ DDR_REG(1)= DDR_REG(1)& (~(1<<SCK));
+ SPCR=(1<<SPE);
+
 }
 
 void masterTransmit(char spiData){
