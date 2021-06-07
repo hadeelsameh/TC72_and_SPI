@@ -10,6 +10,7 @@
 #define SPI_H_
 #define F_CPU 4000000UL
 void masterInit(void);
+void slaveInit(void);
 void masterTransmit(char spiData);
 char masterReceive(void);
 
