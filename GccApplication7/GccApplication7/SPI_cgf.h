@@ -2,7 +2,7 @@
  * SPI_cgf.h
  *
  * Created: 01/06/2021 14:35:12
- *  Author: Hadeel
+ *  Author: Enas
  */ 
 
 
@@ -22,6 +22,7 @@
 
  
 #define MOSI  7
+#define MISO  6
 #define SCK 5
 #define SS 4
 
